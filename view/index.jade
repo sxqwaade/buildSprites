@@ -1,0 +1,30 @@
+doctype html
+html(lang='zh-CN' ng-controller='LayoutController')
+    head
+        meta(charset='utf-8')
+        script(type='text/javascript' src='/static/angular.min.js')    
+        script(type='text/javascript' src='/static/ng-file-upload.min.js') 
+        script(type='text/javascript' src='/static/test.js')   
+    body(ng-app="fileUpload" ng-controller="MyCtrl")
+        h4.
+            选择文件上传
+        button(ngf-select="uploadFiles($files,$invalidFiles)" multiple accept="images/*" ngf-max-height="1000" ngf-max-size="1MB").
+            选择文件
+        h3.
+            文件:
+        ul
+            li(ng-repeat="f in files" style="font:smaller")
+                |{{f.name}}{{f.$errorParam}}
+                span(class="progress" ng-show= "f.progress >= 0")
+                    div(style="width:{{f.progress}}%" ng-bind="f.progress+'%'")
+            li(ng-repeat="f in errFiles" style="font:smaller")
+                {{f.name}}{{f.$error}}{{f.$errorParam}}            
+        |{{errorMsg}}         
+        button(ng-click="getSprite()").
+            获取雪碧图
+        img(ng-src="{{spriteImgSrc}}")
+        a(target="_blank" href="{{spriteImgSrc}}").
+            雪碧图链接   
+        a(target="_blank" href="{{spriteCssSrc}}").
+            雪碧图CSS        
+        
